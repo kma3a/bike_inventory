@@ -6,10 +6,15 @@ function Bike(brand, model, color, salePrice) {
 	this.salePrice = salePrice;
 }
 
+Bike.prototype.displayBike = function() {
+	console.log("The price of the " +this.color + " " + this.brand + " " + this.model + " is now " + this.salePrice + ".");
+};
+
 Bike.prototype.updatePrice = function(newPrice) {
 	this.salePrice = newPrice;
 	console.log("The price of the " +this.color + " " + this.brand + " " + this.model + " is now " + this.salePrice + ".");
-}
+};
 
 myBike = new Bike("harley", "Zoom", "Yellow", 123.20);
+myBike.displayBike();
 myBike.updatePrice(103.20);

@@ -25,9 +25,9 @@ function Inventory() {
 }
 
 Inventory.prototype.addNewBike = function(newBike) {
-	console.log("Hello");
 	this.allBikes.push(newBike);
 }
+
 
 myInventory = new Inventory();
 myInventory.addNewBike(myBike);
@@ -52,6 +52,28 @@ RunInventory.prototype.addBike = function() {
 	var salePrice = this.getInput("What is the sale price of the bike?");
 	this.currentInventory.addNewBike(new Bike(brand,model, color,salePrice));
 }
+
+RunInventory.prototype.search = function() {
+	console.log("1- brand\n2- color\n3- sale price range\n4- return to menu");
+	switch(this.getInput("What would you like to search by?") {
+		case "1":
+			this.menu();
+			break;
+		case "2":
+			this.menu();
+			break;
+		case "3":
+			this.menu();
+			break;
+		case "4":
+			this.menu();
+			break;
+		default:
+			this.search();
+			break;
+	}
+}
+
 	
 
 RunInventory.prototype.menu = function() {
@@ -68,6 +90,7 @@ RunInventory.prototype.menu = function() {
 			this.menu();
 			break;
 		case "4":
+			this.search();
 			this.menu();
 			break;
 		case "5":

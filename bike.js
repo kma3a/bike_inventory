@@ -1,3 +1,4 @@
+var sget = require('sget');
 
 function Bike(brand, model, color, salePrice) {
 	this.brand = brand;
@@ -36,6 +37,10 @@ RunInventory.prototype.startInventory= function() {
 	this.menu();
 }
 
+RunInventory.prototype.getInput = function(message) {
+	return sget(message).trim().toUpperCase();
+}
+
 RunInventory.prototype.menu = function() {
 	console.log("1- add a bike\n2-remove a bike\n3- view a bike\n4- search for a bike\n5- view inventory\n6- exit");
 	switch(this.getInput("What would you like to do?")) {
@@ -50,6 +55,7 @@ RunInventory.prototype.menu = function() {
 		case "5":
 			this.menu();
 		case "6":
+			break;
 		default: 
 			this.menu();
 			break;

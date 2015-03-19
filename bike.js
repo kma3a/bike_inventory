@@ -22,3 +22,7 @@ myBike.updatePrice(103.20);
 function Inventory() {
 	this.allBikes = [];
 }
+
+Bike.prototype.addBike = function(newBike) {
+	this.allBikes.push(newBike);
+}

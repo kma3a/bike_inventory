@@ -30,3 +30,8 @@ Bike.prototype.addBike = function(newBike) {
 function RunInventory() {
 	this.currentInvetory = new Inventory();
 }
+
+RunInventory.prototype.startInventory() {
+	console.log("Welcome to your Inventory");
+	this.menu();
+}

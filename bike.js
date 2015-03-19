@@ -26,3 +26,7 @@ function Inventory() {
 Bike.prototype.addBike = function(newBike) {
 	this.allBikes.push(newBike);
 }
+
+function RunInventory() {
+	this.currentInvetory = new Inventory();
+}

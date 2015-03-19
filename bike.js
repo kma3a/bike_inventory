@@ -18,3 +18,7 @@ Bike.prototype.updatePrice = function(newPrice) {
 myBike = new Bike("harley", "Zoom", "Yellow", 123.20);
 myBike.displayBike();
 myBike.updatePrice(103.20);
+
+function Inventory() {
+	this.allBikes = [];
+}

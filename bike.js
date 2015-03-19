@@ -38,6 +38,15 @@ Inventory.prototype.findByBrand = function(brandName) {
 	return bikes;
 }
 
+Inventory.prototype.findByColor = function(colorName) {
+	var bikes = [];
+	this.allBikes.forEach(function(bike) {
+		if(bike.color === colorName) {
+			bikes.push(bike);
+		}
+	})
+	return bikes;
+}
 
 myInventory = new Inventory();
 myInventory.addNewBike(myBike);
@@ -107,7 +116,7 @@ RunInventory.prototype.search = function() {
 	
 
 RunInventory.prototype.menu = function() {
-	console.log("1- add a bike\n2-remove a bike\n3- view a bike\n4- search for a bike\n5- view inventory\n6- exit");
+	console.log("1- add a bike\n2-remove a bike\n3- search for a bike\n4- view inventory\n5- exit");
 	switch(this.getInput("What would you like to do?")) {
 		case "1":
 			this.addBike();
@@ -117,16 +126,13 @@ RunInventory.prototype.menu = function() {
 			this.menu();
 			break;
 		case "3":
-			this.menu();
-			break;
-		case "4":
 			this.search();
 			this.menu();
 			break;
-		case "5":
+		case "4":
 			this.menu();
 			break;
-		case "6":
+		case "5":
 			break;
 		default: 
 			this.menu();

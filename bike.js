@@ -48,6 +48,26 @@ Inventory.prototype.findByColor = function(colorName) {
 	return bikes;
 }
 
+Inventory.prototype.findInRange = function(minNumber,maxNumber) {
+	var bikes = [];
+	this.allBikes.forEach(function(bike) {
+		if(bike.price < maxNumber && bike.price >= minNumber) {
+			bikes.push(bike);
+		}
+	})
+	return bikes;
+}
+
+Inventory.prototype.findGreaterThan = function(minNumber) {
+	var bikes = [];
+	this.allBikes.forEach(function(bike) {
+		if(bike.price >= minNumber) {
+			bikes.push(bike);
+		}
+	})
+	return bikes;
+}
+
 myInventory = new Inventory();
 myInventory.addNewBike(myBike);
 

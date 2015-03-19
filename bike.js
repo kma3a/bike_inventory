@@ -28,6 +28,16 @@ Inventory.prototype.addNewBike = function(newBike) {
 	this.allBikes.push(newBike);
 }
 
+Inventory.prototype.findByBrand = function(brandName) {
+	var bikes = [];
+	this.allBikes.forEach(function(bike) {
+		if(bike.brand === brandName) {
+			bikes.push(bike);
+		}
+	})
+	return bikes;
+}
+
 
 myInventory = new Inventory();
 myInventory.addNewBike(myBike);
@@ -53,10 +63,22 @@ RunInventory.prototype.addBike = function() {
 	this.currentInventory.addNewBike(new Bike(brand,model, color,salePrice));
 }
 
+RunInventory.prototype.searchByBrand = function(brandName) {
+	var brandList = this.currentInventory.findByBrand(brandName);
+	if (brandList.length === 0) {
+		return console.log("sorry that brand could not be found");
+	} else {
+		brandList.forEach(function(bike) {
+			bike.displayBike();
+		})
+	}
+}
+
 RunInventory.prototype.search = function() {
 	console.log("1- brand\n2- color\n3- sale price range\n4- return to menu");
-	switch(this.getInput("What would you like to search by?") {
+	switch(this.getInput("What would you like to search by?")) {
 		case "1":
+			return this.searchByBrand(this.getInput("What is the brand you would like to search for?"));
 			this.menu();
 			break;
 		case "2":

@@ -31,7 +31,32 @@ function RunInventory() {
 	this.currentInvetory = new Inventory();
 }
 
-RunInventory.prototype.startInventory() {
+RunInventory.prototype.startInventory= function() {
 	console.log("Welcome to your Inventory");
 	this.menu();
 }
+
+RunInventory.prototype.menu = function() {
+	console.log("1- add a bike\n2-remove a bike\n3- view a bike\n4- search for a bike\n5- view inventory\n6- exit");
+	switch(this.getInput("What would you like to do?")) {
+		case "1":
+			this.menu();
+		case "2":
+			this.menu();
+		case "3":
+			this.menu();
+		case "4":
+			this.menu();
+		case "5":
+			this.menu();
+		case "6":
+		default: 
+			this.menu();
+			break;
+	}
+}
+
+
+var game = new RunInventory;
+game.startInventory();
+

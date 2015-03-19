@@ -66,9 +66,20 @@ RunInventory.prototype.addBike = function() {
 RunInventory.prototype.searchByBrand = function(brandName) {
 	var brandList = this.currentInventory.findByBrand(brandName);
 	if (brandList.length === 0) {
-		return console.log("sorry that brand could not be found");
+		return console.log("sorry bikes of that brand could not be found");
 	} else {
 		brandList.forEach(function(bike) {
+			bike.displayBike();
+		})
+	}
+}
+
+RunInventory.prototype.searchByColor = function(colorName) {
+	var colorList = this.currentInventory.findByColor(colorName);
+	if (colorList.length === 0) {
+		return console.log("sorry bikes of that color could not be found");
+	} else {
+		colorList.forEach(function(bike) {
 			bike.displayBike();
 		})
 	}
@@ -79,11 +90,8 @@ RunInventory.prototype.search = function() {
 	switch(this.getInput("What would you like to search by?")) {
 		case "1":
 			return this.searchByBrand(this.getInput("What is the brand you would like to search for?"));
-			this.menu();
-			break;
 		case "2":
-			this.menu();
-			break;
+			return this.searchByColor(this.getInput("What is the color of the bike you are looking for?"));
 		case "3":
 			this.menu();
 			break;

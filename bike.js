@@ -51,7 +51,7 @@ Inventory.prototype.findByColor = function(colorName) {
 Inventory.prototype.findInRange = function(minNumber,maxNumber) {
 	var bikes = [];
 	this.allBikes.forEach(function(bike) {
-		if(bike.price < maxNumber && bike.price >= minNumber) {
+		if(bike.salePrice < maxNumber && bike.salePrice >= minNumber) {
 			bikes.push(bike);
 		}
 	})
@@ -61,7 +61,7 @@ Inventory.prototype.findInRange = function(minNumber,maxNumber) {
 Inventory.prototype.findGreaterThan = function(minNumber) {
 	var bikes = [];
 	this.allBikes.forEach(function(bike) {
-		if(bike.price >= minNumber) {
+		if(bike.salePrice >= minNumber) {
 			bikes.push(bike);
 		}
 	})
@@ -92,25 +92,32 @@ RunInventory.prototype.addBike = function() {
 	this.currentInventory.addNewBike(new Bike(brand,model, color,salePrice));
 }
 
-RunInventory.prototype.searchByBrand = function(brandName) {
-	var brandList = this.currentInventory.findByBrand(brandName);
-	if (brandList.length === 0) {
-		return console.log("sorry bikes of that brand could not be found");
+
+RunInventory.prototype.displayList = function(list) {
+	if (list.length === 0) {
+		return console.log("sorry bikes of that range could not be found");
 	} else {
-		brandList.forEach(function(bike) {
+		list.forEach(function(bike) {
 			bike.displayBike();
 		})
 	}
 }
 
-RunInventory.prototype.searchByColor = function(colorName) {
-	var colorList = this.currentInventory.findByColor(colorName);
-	if (colorList.length === 0) {
-		return console.log("sorry bikes of that color could not be found");
-	} else {
-		colorList.forEach(function(bike) {
-			bike.displayBike();
-		})
+RunInventory.prototype.searchByRange = function() {
+	console.log("1- under 500\n2- 500-1000\n3- 1000+\n4- return to search menu");
+	switch(this.getInput("What would you like to search by?")) {
+		case "1":
+			return this.displayList(this.currentInventory.findInRange(0,500));
+		case "2":
+			return this.displayList(this.currentInventory.findInRange(500,1000));
+		case "3":
+			return this.displayList(this.currentInventory.findGreaterThan(1000));
+		case "4":
+			this.menu();
+			break;
+		default:
+			this.search();
+			break;
 	}
 }
 
@@ -118,10 +125,12 @@ RunInventory.prototype.search = function() {
 	console.log("1- brand\n2- color\n3- sale price range\n4- return to menu");
 	switch(this.getInput("What would you like to search by?")) {
 		case "1":
-			return this.searchByBrand(this.getInput("What is the brand you would like to search for?"));
+			return this.displayList(this.currentInventory.findByBrand(this.getInput("What is the brand you would like to search for?")));
 		case "2":
-			return this.searchByColor(this.getInput("What is the color of the bike you are looking for?"));
+			return this.displayList(this.currentInventory.findByColor(this.getInput("What is the color you would like to search for?")));
+
 		case "3":
+			this.searchByRange();	
 			this.menu();
 			break;
 		case "4":

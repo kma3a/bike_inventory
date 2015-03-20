@@ -8,7 +8,7 @@ function Bike(brand, model, color, salePrice) {
 }
 
 Bike.prototype.displayBike = function() {
-	return "The price of the " +this.color + " " + this.brand + " " + this.model + " is now " + this.salePrice + ".";
+	return "brand: " + this.brand + " model: " + this.model + " color: " + this.color + " price: " + this.salePrice;
 };
 
 Bike.prototype.updatePrice = function(newPrice) {

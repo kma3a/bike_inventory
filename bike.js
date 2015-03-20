@@ -178,23 +178,27 @@ RunInventory.prototype.searchByRange = function() {
 
 RunInventory.prototype.search = function() {
 	console.log("1- brand\n2- color\n3- sale price range\n4- return to menu");
-	switch(this.getInput("What would you like to search by?")) {
-		case "1":
-			var currentList = this.currentInventory.findByBrand(this.getInput("What is the brand you would like to search for?"));
-			this.displayList(currentList);
-		case "2":
-			var currentList = this.currentInventory.findByColor(this.getInput("What is the color you would like to search for?"));
-			this.displayList(currentList);
-		case "3":
-			this.searchByRange();	
-			this.menu();
-			break;
-		case "4":
-			this.menu();
-			break;
-		default:
-			this.search();
-			break;
+	var input = this.getInput("What would you like to search by?");
+	var options = { "1": function() {
+			var currentList = game.currentInventory.findByBrand(game.getInput("What is the brand you would like to search for?"));
+			game.displayList(currentList);
+		},
+		"2": function() {
+			var currentList = game.currentInventory.findByColor(game.getInput("What is the color you would like to search for?"));
+			game.displayList(currentList);
+		},
+		"3": function() {
+			game.searchByRange();	
+			game.menu();
+		},
+		"4": function() {
+			game.menu();
+		}
+	}
+	if(options[input]) {
+		options[input]();
+	} else {
+		this.search();
 	}
 }
 

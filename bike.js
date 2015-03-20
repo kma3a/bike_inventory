@@ -8,12 +8,12 @@ function Bike(brand, model, color, salePrice) {
 }
 
 Bike.prototype.displayBike = function() {
-	console.log("The price of the " +this.color + " " + this.brand + " " + this.model + " is now " + this.salePrice + ".");
+	return "The price of the " +this.color + " " + this.brand + " " + this.model + " is now " + this.salePrice + ".";
 };
 
 Bike.prototype.updatePrice = function(newPrice) {
 	this.salePrice = newPrice;
-	console.log("The price of the " +this.color + " " + this.brand + " " + this.model + " is now " + this.salePrice + ".");
+	return console.log("The price of the " +this.color + " " + this.brand + " " + this.model + " is now " + this.salePrice + ".");
 };
 
 myBike = new Bike("harley", "Zoom", "Yellow", 123.20);
@@ -105,26 +105,39 @@ RunInventory.prototype.addBike = function() {
 
 RunInventory.prototype.displayList = function(list) {
 	if (list.length === 0) {
-		return console.log("sorry bikes of that range could not be found");
+		console.log("sorry bikes of that range could not be found");
 	} else {
-		list.forEach(function(bike) {
-			bike.displayBike();
-		})
+		this.options(list);
+		}
+}
+
+RunInventory.prototype.options = function(list) {
+	list.forEach(function(bike, index) {
+		return	console.log( index + ", " + bike.displayBike());
+	})
+	var userInput = this.getInput("Which bike would you like to view? (or 'exit' to go to main menu");
+	if (!isNaN(userInput) && list[userInput] !== -1){
+		this.viewBike(list[userInput]);	
+	} else if (userInput === 'EXIT') {
+		this.menu();
+	} else {
+		this.options(list);
 	}
 }
+
 
 RunInventory.prototype.searchByRange = function() {
 	console.log("1- under 500\n2- 500-1000\n3- 1000+\n4- return to search menu");
 	switch(this.getInput("What would you like to search by?")) {
 		case "1":
 			var currentList = this.currentInventory.findInRange(0,500);
-			return this.displayList(currentList);
+			this.displayList(currentList);
 		case "2":
 			var currentList = this.currentInventory.findInRange(500,1000);
-			return this.displayList(currentList));
+			this.displayList(currentList);
 		case "3":
 			var currentList = this.currentInventory.findGreaterThan(1000);
-			return this.displayList(currentList);
+			this.displayList(currentList);
 		case "4":
 			this.menu();
 			break;
@@ -139,11 +152,10 @@ RunInventory.prototype.search = function() {
 	switch(this.getInput("What would you like to search by?")) {
 		case "1":
 			var currentList = this.currentInventory.findByBrand(this.getInput("What is the brand you would like to search for?"));
-			return this.displayList(currentList);
+			this.displayList(currentList);
 		case "2":
 			var currentList = this.currentInventory.findByColor(this.getInput("What is the color you would like to search for?"));
-			return this.displayList(currentList);
-
+			this.displayList(currentList);
 		case "3":
 			this.searchByRange();	
 			this.menu();

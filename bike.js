@@ -111,11 +111,33 @@ RunInventory.prototype.displayList = function(list) {
 		}
 }
 
+RunInventory.prototype.viewBike = function(currentBike) {
+	var bikeMenu = {"1":function(currentBike) {game.currentInventory,removeBike(currentBike);},
+			"2": function(currentBike) {var getNewPrice = game.getInput("What is the new sale price?");
+					if ( isNaN(getNewPrice)) {
+						console.log("Must be a number");
+						game.viewBike(currentBike); 
+					} else {
+						currentBike.updatePrice(getNewPrice);
+					}
+				},
+			"3": function() {game.menu();}
+		}
+	console.log("1- remove bike\n2- edit price\n3- return to menu");
+	var userChoice = this.getInput("What would you like to do?");
+	if (bikeMenu[userChoice]) {
+		bikeMenu[userChoice](currentBike);
+	}  else {
+		console.log("command not avalible");
+		this.viewBike(currentBike);
+	}
+}
+
 RunInventory.prototype.options = function(list) {
 	list.forEach(function(bike, index) {
 		return	console.log( index + ", " + bike.displayBike());
 	})
-	var userInput = this.getInput("Which bike would you like to view? (or 'exit' to go to main menu");
+	var userInput = this.getInput("Which bike would you like to view? (or 'exit' to go to main menu)");
 	if (!isNaN(userInput) && list[userInput] !== -1){
 		this.viewBike(list[userInput]);	
 	} else if (userInput === 'EXIT') {

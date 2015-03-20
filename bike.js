@@ -156,22 +156,23 @@ RunInventory.prototype.options = function(list) {
 
 RunInventory.prototype.searchByRange = function() {
 	console.log("1- under 500\n2- 500-1000\n3- 1000+\n4- return to search menu");
-	switch(this.getInput("What would you like to search by?")) {
-		case "1":
-			var currentList = this.currentInventory.findInRange(0,500);
-			this.displayList(currentList);
-		case "2":
-			var currentList = this.currentInventory.findInRange(500,1000);
-			this.displayList(currentList);
-		case "3":
-			var currentList = this.currentInventory.findGreaterThan(1000);
-			this.displayList(currentList);
-		case "4":
-			this.menu();
-			break;
-		default:
-			this.search();
-			break;
+	var input = this.getInput("What would you like to search by?");
+	var options = {"1":function() {	var currentList = game.currentInventory.findInRange(0,500);
+			game.displayList(currentList);
+			},
+			"2":function() { var currentList = game.currentInventory.findInRange(500,1000);
+			game.displayList(currentList);
+			},
+			"3":function() { var currentList = game.currentInventory.findGreaterThan(1000);
+			game.displayList(currentList);
+			},
+			"4":function() { game.menu();
+			}
+	}
+	if (options[input]){
+		options[input]();
+	} else {
+		this.search();
 	}
 }
 

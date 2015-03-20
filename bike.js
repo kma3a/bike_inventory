@@ -203,28 +203,29 @@ RunInventory.prototype.search = function() {
 }
 
 RunInventory.prototype.menu = function() {
-	console.log("1- add a bike\n2-remove a bike\n3- search for a bike\n4- view inventory\n5- exit");
-	switch(this.getInput("What would you like to do?")) {
-		case "1":
-			this.addBike();
-			this.menu();
-			break;
-		case "2":
-			this.menu();
-			break;
-		case "3":
-			this.search();
-			this.menu();
-			break;
-		case "4":
+	console.log("1- add a bike\n2- search for a bike\n3- view inventory\n4- exit");
+	var input = this.getInput("What would you like to do?");
+	var option = {
+		"1": function() {
+			game.addBike();
+			game.menu();
+		},
+		"2": function() {
+			game.search();
+			game.menu();
+		},
+		"3": function() {
 			game.currentInventory.viewInventory();
-			this.menu();
-			break;
-		case "5":
-			break;
-		default: 
-			this.menu();
-			break;
+			game.menu();
+		},
+		"4": function() {
+			console.log("Thanks for using this Inventory system!");
+		}
+	};
+	if (option[input]) {
+		option[input]();
+	} else {
+		this.menu();
 	}
 }
 

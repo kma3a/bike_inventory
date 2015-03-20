@@ -73,7 +73,7 @@ Inventory.prototype.viewInventory = function() {
 		console.log("You have nothing in your inventory");
 	} else {
 		this.allBikes.forEach(function(bike) {
-			bike.displayBike();
+			console.log(bike.displayBike());
 		})
 	}
 }
@@ -144,7 +144,7 @@ RunInventory.prototype.options = function(list) {
 		return	console.log( index + ", " + bike.displayBike());
 	})
 	var userInput = this.getInput("Which bike would you like to view? (or 'exit' to go to main menu)");
-	if (!isNaN(userInput) && list[userInput] !== -1){
+	if (!isNaN(userInput) && list[userInput] !== undefined){
 		this.viewBike(list[userInput]);	
 	} else if (userInput === 'EXIT') {
 		this.menu();

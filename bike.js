@@ -68,6 +68,16 @@ Inventory.prototype.findGreaterThan = function(minNumber) {
 	return bikes;
 }
 
+Inventory.prototype.viewInventory = function() {
+	if (this.allBikes.length === 0) {
+		console.log("You have nothing in your inventory");
+	} else {
+		this.allBikes.forEach(function(bike) {
+			bike.displayBike();
+		})
+	}
+}
+
 myInventory = new Inventory();
 myInventory.addNewBike(myBike);
 
@@ -142,8 +152,6 @@ RunInventory.prototype.search = function() {
 	}
 }
 
-	
-
 RunInventory.prototype.menu = function() {
 	console.log("1- add a bike\n2-remove a bike\n3- search for a bike\n4- view inventory\n5- exit");
 	switch(this.getInput("What would you like to do?")) {
@@ -159,6 +167,7 @@ RunInventory.prototype.menu = function() {
 			this.menu();
 			break;
 		case "4":
+			game.currentInventory.viewInventory();
 			this.menu();
 			break;
 		case "5":

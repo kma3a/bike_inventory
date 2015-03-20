@@ -117,11 +117,14 @@ RunInventory.prototype.searchByRange = function() {
 	console.log("1- under 500\n2- 500-1000\n3- 1000+\n4- return to search menu");
 	switch(this.getInput("What would you like to search by?")) {
 		case "1":
-			return this.displayList(this.currentInventory.findInRange(0,500));
+			var currentList = this.currentInventory.findInRange(0,500);
+			return this.displayList(currentList);
 		case "2":
-			return this.displayList(this.currentInventory.findInRange(500,1000));
+			var currentList = this.currentInventory.findInRange(500,1000);
+			return this.displayList(currentList));
 		case "3":
-			return this.displayList(this.currentInventory.findGreaterThan(1000));
+			var currentList = this.currentInventory.findGreaterThan(1000);
+			return this.displayList(currentList);
 		case "4":
 			this.menu();
 			break;
@@ -135,9 +138,11 @@ RunInventory.prototype.search = function() {
 	console.log("1- brand\n2- color\n3- sale price range\n4- return to menu");
 	switch(this.getInput("What would you like to search by?")) {
 		case "1":
-			return this.displayList(this.currentInventory.findByBrand(this.getInput("What is the brand you would like to search for?")));
+			var currentList = this.currentInventory.findByBrand(this.getInput("What is the brand you would like to search for?"));
+			return this.displayList(currentList);
 		case "2":
-			return this.displayList(this.currentInventory.findByColor(this.getInput("What is the color you would like to search for?")));
+			var currentList = this.currentInventory.findByColor(this.getInput("What is the color you would like to search for?"));
+			return this.displayList(currentList);
 
 		case "3":
 			this.searchByRange();	

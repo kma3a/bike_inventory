@@ -78,6 +78,12 @@ Inventory.prototype.viewInventory = function() {
 	}
 }
 
+Inventory.prototype.removeBike = function(currentBike) {
+	var index = this.allBikes.indexOf(currentBike);
+	console.log(currentBike.displayBike() + " has been removed.");
+	this.allBikes.splice(index,1);
+}
+
 myInventory = new Inventory();
 myInventory.addNewBike(myBike);
 
@@ -112,7 +118,7 @@ RunInventory.prototype.displayList = function(list) {
 }
 
 RunInventory.prototype.viewBike = function(currentBike) {
-	var bikeMenu = {"1":function(currentBike) {game.currentInventory,removeBike(currentBike);},
+	var bikeMenu = {"1":function(currentBike) {game.currentInventory.removeBike(currentBike);},
 			"2": function(currentBike) {var getNewPrice = game.getInput("What is the new sale price?");
 					if ( isNaN(getNewPrice)) {
 						console.log("Must be a number");
